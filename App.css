@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.header {
+  padding: 5px;
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+  grid-template-rows: 80px;
+  background-color: #3F51B5;
+  color: #FF5722;
+}
+
+.header a {
+  color: #FF5722;
+}
+.header-name {
+  align-self: end;
+}
+.header-left {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.header-icon {
+  grid-row: 1 /span 2;
+}
+
+.header p, .header h4 {
+  margin: 0px;
+  padding: 0px;
+  padding-left: 10px;
+}
+
+.header-right {
+  justify-self: end;
+  align-self: center;
+  text-align: right;
+}
+.header-right a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.header-right svg {
+  color: #FF5722 !important;
+}
+.material-icons.md-36 {
+  font-size: 36px;
+}

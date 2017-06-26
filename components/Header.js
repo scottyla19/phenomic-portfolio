@@ -1,0 +1,90 @@
+import React, { Component } from "react";
+import IconMenu from "material-ui/IconMenu";
+import MenuItem from "material-ui/MenuItem";
+import IconButton from "material-ui/IconButton";
+import MenuIcon from "material-ui/svg-icons/navigation/menu";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import { Link } from "react-router";
+// import logo from "./logo.svg";
+// import "./App.css";
+
+class Header extends Component {
+  render() {
+    return (
+      <div className="header">
+        <div className="header-left">
+          <h3 className="header-icon">
+            My Img
+
+          </h3>
+          <h4 className="header-name">
+            Scott LaForest
+          </h4>
+          <p>
+            Web Developer
+          </p>
+        </div>
+        <div className="header-right">
+          <MuiThemeProvider>
+            <IconMenu
+              iconButtonElement={
+                <IconButton>
+                  <MenuIcon />
+                </IconButton>
+              }
+              anchorOrigin={{ horizontal: "right", vertical: "top" }}
+              targetOrigin={{ horizontal: "right", vertical: "top" }}
+            >
+              <MenuItem>
+                <Link
+                  to="/"
+                  style={{
+                    color: "inherit",
+                    textDecoration: "none"
+                  }}
+                >
+                  Home
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link
+                  to="/about"
+                  style={{
+                    color: "inherit",
+                    textDecoration: "none"
+                  }}
+                >
+                  About
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link
+                  to="/blog"
+                  style={{
+                    color: "inherit",
+                    textDecoration: "none"
+                  }}
+                >
+                  Blog
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link
+                  to="/contact"
+                  style={{
+                    color: "inherit",
+                    textDecoration: "none"
+                  }}
+                >
+                  Contact
+                </Link>
+              </MenuItem>
+            </IconMenu>
+          </MuiThemeProvider>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Header;
