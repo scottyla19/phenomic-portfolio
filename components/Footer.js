@@ -24,7 +24,7 @@ class Footer extends Component {
             href="https://github.com/scottyla19/phenomic-portfolio"
             style={{ color: "inherit" }}
           >
-            <i className="fa fa-github" ariaHidden="true" />
+            <i className="fa fa-github" />
           </a>
         </div>
 

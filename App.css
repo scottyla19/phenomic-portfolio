@@ -2,6 +2,10 @@ body {
   margin: 0;
   padding: 0;
 }
+a {
+  text-decoration: none;
+  color: black;
+}
 .header {
   padding: 5px;
   display: grid;
@@ -48,13 +52,39 @@ body {
 }
 .material-icons.md-36 {
   font-size: 36px;
+  color: red;
 }
 
 .main-container {
-  padding-left: 10%;
-  padding-right: 10%;
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr;
+  grid-template-areas: ". content .";
+}
+.content {
+  grid-area: content;
+  justify-self: center;
+  min-width: 80vw;
 }
 
+.row {
+  display: flex;
+  flex-flow: row wrap;
+}
+.row-div {
+  display: flex;
+  flex-flow: column nowrap;
+
+  justify-self: center;
+  align-items: center;
+}
+.row-item {
+  display: flex;
+  flex-flow: column nowrap;
+
+  justify-self: center;
+  align-items: center;
+  flex: 1 1 auto;
+}
 .footer {
   display: flex;
   flex-direction: column;
