@@ -4,7 +4,7 @@ body {
 }
 a {
   text-decoration: none;
-  color: black;
+  color: #3F51B5;
 }
 .header {
   padding: 5px;
@@ -41,18 +41,15 @@ a {
   justify-self: end;
   align-self: center;
   text-align: right;
+  padding-right: 10px;
 }
 .header-right a {
   color: inherit !important;
   text-decoration: none !important;
 }
 
-.header-right svg {
-  color: #FF5722 !important;
-}
 .material-icons.md-36 {
-  font-size: 36px;
-  color: red;
+  font-size: 36px !important;
 }
 
 .main-container {
@@ -73,17 +70,20 @@ a {
 .row-div {
   display: flex;
   flex-flow: column nowrap;
-
   justify-self: center;
   align-items: center;
+  min-width: 100px;
 }
 .row-item {
   display: flex;
   flex-flow: column nowrap;
-
   justify-self: center;
   align-items: center;
   flex: 1 1 auto;
+}
+.btnIcon {
+  padding-left: 1em;
+  margin-right: 0;
 }
 .footer {
   display: flex;

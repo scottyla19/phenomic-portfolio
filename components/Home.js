@@ -8,7 +8,6 @@ const iconStyles = {
   alignSelf: "center",
   justifySelf: "center",
   margin: 0,
-  color: "inherit",
   fontSize: "36px"
 };
 
@@ -30,7 +29,11 @@ const Home = props => {
             <div className="row-item">
               <Link to="/about">
                 <div className="row-div">
-                  <FontIcon className="material-icons" style={iconStyles}>
+                  <FontIcon
+                    className="material-icons"
+                    style={iconStyles}
+                    color={"#FF5722"}
+                  >
                     person_pin
                   </FontIcon>
                   <h3> About Me</h3>

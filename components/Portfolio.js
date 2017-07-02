@@ -12,6 +12,8 @@ import {
   CardText
 } from "material-ui/Card";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import FlatButton from "material-ui/FlatButton";
+import FontIcon from "material-ui/FontIcon";
 
 const style = {
   height: 40,
@@ -39,7 +41,7 @@ const Portfolio = props => {
 
           <div className="row">
             <div className="row-item">
-              <Card>
+              <Card style={{ maxWidth: "400px" }}>
                 <CardHeader
                   title="Learning with LaForest"
                   subtitle="My Teacher Website"
@@ -71,14 +73,27 @@ const Portfolio = props => {
                     here
                   </a>
                 </CardText>
+                <CardActions>
+                  <FlatButton
+                    href="https://github.com/scottyla19/learn-with-laforest"
+                    target="_blank"
+                    label="GitHub Repo"
+                  />
+
+                  <FlatButton
+                    href="https://learn-with-laforest.firebaseapp.com/"
+                    target="_blank"
+                    label="Live Site"
+                  />
+                </CardActions>
 
               </Card>
             </div>
             <div className="row-item">
-              <Card>
+              <Card style={{ maxWidth: "400px" }}>
                 <CardHeader
                   title="React-Tac-Toe"
-                  subtitle="Upgrade of the Facebook tic-tac-toe tutorial."
+                  subtitle="Upgraded tic-tac-toe tutorial."
                 >
                   <Paper style={reactStyle} zDepth={1} circle={true}>
                     <h4>React</h4>
@@ -101,6 +116,19 @@ const Portfolio = props => {
                   game moves, highlighting the winning
                   moves, and updated the layout.
                 </CardText>
+                <CardActions>
+                  <FlatButton
+                    href="https://github.com/scottyla19/react-tac-toe"
+                    target="_blank"
+                    label="GitHub Repo"
+                  />
+
+                  <FlatButton
+                    href="https://learn-with-laforest.firebaseapp.com/"
+                    target="_blank"
+                    label="Live Site"
+                  />
+                </CardActions>
 
               </Card>
 

@@ -9,10 +9,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { Link } from "react-router";
 // import logo from "./logo.svg";
 // import "./App.css";
-const iconStyles = {
-  color: "inherit",
-  fontSize: "36px"
-};
+const iconStyles = { fontSize: "36px" };
 const Header = props => {
   return (
     <div className="header">
@@ -36,6 +33,7 @@ const Header = props => {
                 <FontIcon
                   className="material-icons md-36"
                   color={"#FF5722"}
+                  fontSize="36px"
                   style={iconStyles}
                 >
                   menu
