@@ -19,6 +19,7 @@ export default createApp(() =>
     <Route path="/about" component={About} />
     <Route path="/portfolio" component={Portfolio} />
     <Route path="/blog" component={BlogContainer} />
+    <Route path="/after/:after" component={BlogContainer} />
     <Route path="/blog/*" component={BlogPostContainer} collection="posts" />
     <Route path="/contact" component={Contact} />
   </Router>

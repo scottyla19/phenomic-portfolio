@@ -6,6 +6,9 @@ a {
   text-decoration: none;
   color: #3F51B5;
 }
+li {
+  list-style: none;
+}
 .header {
   padding: 5px;
   display: grid;
@@ -14,7 +17,27 @@ a {
   background-color: #3F51B5;
   color: #FF5722;
 }
-
+.blogListItem {
+  display: flex;
+  flex-flow: row wrap;
+}
+.blogListDate {
+  width: 25%;
+  align-self: flex-end;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.blogListTitle {
+  width: 75%;
+  align-self: center;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.blogListDesc {
+  width: 100%;
+  margin-top: 0;
+  padding-top: 0;
+}
 .header a {
   color: #FF5722;
 }

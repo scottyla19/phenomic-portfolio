@@ -9,11 +9,14 @@ import {
 
 const BlogPost = ({ page }) =>
   <Layout>
-    <div>
+    <div className="content">
       {page.node &&
         <article>
           <h1>{page.node.title}</h1>
-          <BodyRenderer>{page.node.body}</BodyRenderer>
+          <h3>Author: {page.node.author}</h3>
+          <BodyRenderer style={{ width: "100%" }}>
+            {page.node.body}
+          </BodyRenderer>
         </article>}
     </div>
   </Layout>;
