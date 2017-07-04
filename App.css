@@ -15,7 +15,7 @@ li {
   grid-template-columns: 9fr 1fr;
   grid-template-rows: 80px;
   background-color: #3F51B5;
-  color: #FF5722;
+  color: white;
 }
 .blogListItem {
   display: flex;
@@ -52,6 +52,10 @@ li {
 
 .header-icon {
   grid-row: 1 /span 2;
+  color: white;
+}
+.header-icon img {
+  width: 100%;
 }
 
 .header p, .header h4 {

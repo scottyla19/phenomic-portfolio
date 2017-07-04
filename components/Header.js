@@ -14,10 +14,10 @@ const Header = props => {
   return (
     <div className="header">
       <div className="header-left">
-        <h3 className="header-icon">
-          My Img
+        <div className="header-icon">
+          <img src="/laforest-icon-144.png" />
 
-        </h3>
+        </div>
         <h4 className="header-name">
           Scott LaForest
         </h4>

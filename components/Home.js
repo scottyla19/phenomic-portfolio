@@ -44,7 +44,11 @@ const Home = props => {
             <div className="row-item">
               <Link to="/portfolio">
                 <div className="row-div">
-                  <FontIcon className="material-icons" style={iconStyles}>
+                  <FontIcon
+                    className="material-icons"
+                    style={iconStyles}
+                    color={"#FF5722"}
+                  >
                     apps
                   </FontIcon>
                   <h3>Portfolio</h3>
@@ -54,7 +58,11 @@ const Home = props => {
             <div className="row-item">
               <Link to="/blog">
                 <div className="row-div">
-                  <FontIcon className="material-icons" style={iconStyles}>
+                  <FontIcon
+                    className="material-icons"
+                    style={iconStyles}
+                    color={"#FF5722"}
+                  >
                     create
                   </FontIcon>
                   <h3> My Blog</h3>
@@ -64,8 +72,12 @@ const Home = props => {
             <div className="row-item">
               <Link to="/contact">
                 <div className="row-div">
-                  <FontIcon className="material-icons" style={iconStyles}>
-                    contact_mail
+                  <FontIcon
+                    className="material-icons"
+                    style={iconStyles}
+                    color={"#FF5722"}
+                  >
+                    {" "}contact_mail
                   </FontIcon>
                   <h3> Contact Me</h3>
                 </div>
