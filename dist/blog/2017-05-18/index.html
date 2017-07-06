@@ -1,0 +1,97 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/></head><body><div id="PhenomicRoot"><div data-reactroot="" data-reactid="1" data-react-checksum="-1550262897"><!-- react-empty: 2 --><header data-reactid="3"><div class="header" data-reactid="4"><div class="header-left" data-reactid="5"><div class="header-icon" data-reactid="6"><img src="/laforest-icon-144.png" data-reactid="7"/></div><h4 class="header-name" data-reactid="8">Scott LaForest</h4><p data-reactid="9">Web Developer</p></div><div class="header-right" data-reactid="10"><div style="display:inline-block;position:relative;" data-reactid="11"><button style="border:10px;box-sizing:border-box;display:inline-block;font-family:Roboto, sans-serif;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);cursor:pointer;text-decoration:none;margin:0;padding:12px;outline:none;font-size:0;font-weight:inherit;position:relative;z-index:1;overflow:visible;transition:all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;width:48px;height:48px;background:none;-moz-box-sizing:border-box;-webkit-transition:all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;-moz-transition:all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;" tabindex="0" type="button" data-reactid="12"><div data-reactid="13"><span class="material-icons md-36" color="#FF5722" font-size="36px" style="color:#FF5722;position:relative;font-size:24px;display:inline-block;user-select:none;transition:all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-webkit-transition:all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;-moz-transition:all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;" data-reactid="14">menu</span></div></button><div style="display:none;" data-reactid="15"><!-- react-empty: 16 --><!-- react-empty: 17 --></div></div></div></div></header><div class="main-container" data-reactid="18"><div class="content" data-reactid="19"><article data-reactid="20"><h1 data-reactid="21">Indexed DB Notes</h1><h3 data-reactid="22"><!-- react-text: 23 -->Author: <!-- /react-text --><!-- react-text: 24 -->Scott LaForest<!-- /react-text --></h3><div data-reactid="25"><h1 id="notes" data-reactid="26"><a href="#notes" class="phenomic-HeadingAnchor" data-reactid="27">#</a><!-- react-text: 28 -->Notes<!-- /react-text --></h1><!-- react-text: 29 -->
+<!-- /react-text --><h2 id="terminology" data-reactid="30"><a href="#terminology" class="phenomic-HeadingAnchor" data-reactid="31">#</a><!-- react-text: 32 -->Terminology<!-- /react-text --></h2><!-- react-text: 33 -->
+<!-- /react-text --><ul data-reactid="34"><!-- react-text: 35 -->
+<!-- /react-text --><li data-reactid="36">Database: contains all of the object stores (same as sql)</li><!-- react-text: 37 -->
+<!-- /react-text --><li data-reactid="38">Object Store: Similar to tables in sql</li><!-- react-text: 39 -->
+<!-- /react-text --><li data-reactid="40">Index: A property of an object store that allows for easy search and retrieval.</li><!-- react-text: 41 -->
+<!-- /react-text --><li data-reactid="42">Operation: An interaction with a databas.</li><!-- react-text: 43 -->
+<!-- /react-text --><li data-reactid="44">Transaction: A wrapper around an operation that helps keep integrity of a db. If one operation fails, none of the changes are saved and db is unaltered.</li><!-- react-text: 45 -->
+<!-- /react-text --><li data-reactid="46">Cursor: method for iterating over a multiple records in a db</li><!-- react-text: 47 -->
+<!-- /react-text --></ul><!-- react-text: 48 -->
+<!-- /react-text --><h2 id="working-with-db" data-reactid="49"><a href="#working-with-db" class="phenomic-HeadingAnchor" data-reactid="50">#</a><!-- react-text: 51 -->Working with DB<!-- /react-text --></h2><!-- react-text: 52 -->
+<!-- /react-text --><p data-reactid="53"><strong data-reactid="54"> DB and create Object Store (OS)</strong></p><!-- react-text: 55 -->
+<!-- /react-text --><pre data-reactid="56"><code class="language-javascript" data-reactid="57">var dbPromise = idb.open(&#x27;test-db2&#x27;, 1, function(upgradeDb) {
+   console.log(&#x27;making a new object store&#x27;);
+   if (!upgradeDb.objectStoreNames.contains(&#x27;firstOS&#x27;)) {
+     upgradeDb.createObjectStore(&#x27;firstOS&#x27;);
+   }
+ });
+</code></pre><!-- react-text: 58 -->
+<!-- /react-text --><p data-reactid="59"><!-- react-text: 60 --> Always check if OS is already created --&gt; <!-- /react-text --><code data-reactid="61">!upgradeDb.objectStoreNames.contains(&#x27;firstOS&#x27;)</code></p><!-- react-text: 62 -->
+<!-- /react-text --><p data-reactid="63"><!-- react-text: 64 --> <!-- /react-text --><strong data-reactid="65"> Primary Keys</strong></p><!-- react-text: 66 -->
+<!-- /react-text --><p data-reactid="67"> A key path is a property that always exists and contains a unique value. For example, in the case of a &quot;people&quot; object store we could choose the email address as the key path.</p><!-- react-text: 68 -->
+<!-- /react-text --><p data-reactid="69"><code data-reactid="70">upgradeDb.createObjectStore(&#x27;people&#x27;, {keyPath: &#x27;email&#x27;});</code></p><!-- react-text: 71 -->
+<!-- /react-text --><p data-reactid="72">This example creates an object store called &quot;people&quot; and assigns the &quot;email&quot; property as the primary key.</p><!-- react-text: 73 -->
+<!-- /react-text --><p data-reactid="74"><code data-reactid="75">upgradeDb.createObjectStore(&#x27;notes&#x27;, {autoIncrement:true});</code></p><!-- react-text: 76 -->
+<!-- /react-text --><p data-reactid="77">This example creates an object store called &quot;notes&quot; and sets the primary key to be assigned automatically as an auto incrementing number.</p><!-- react-text: 78 -->
+<!-- /react-text --><p data-reactid="79"><code data-reactid="80">upgradeDb.createObjectStore(&#x27;logs&#x27;, {keyPath: &#x27;id&#x27;, autoIncrement:true});</code></p><!-- react-text: 81 -->
+<!-- /react-text --><p data-reactid="82">This example is similar to the previous example, but this time the auto incrementing value is assigned to a property called &quot;id&quot;.</p><!-- react-text: 83 -->
+<!-- /react-text --><h2 id="working-with-data" data-reactid="84"><a href="#working-with-data" class="phenomic-HeadingAnchor" data-reactid="85">#</a><!-- react-text: 86 -->Working with data<!-- /react-text --></h2><!-- react-text: 87 -->
+<!-- /react-text --><p data-reactid="88"><strong data-reactid="89">Creating Data</strong><!-- react-text: 90 -->
+All data operations in IndexedDB are carried out inside a transaction. Each operation has this form:<!-- /react-text --></p><!-- react-text: 91 -->
+<!-- /react-text --><ol data-reactid="92"><!-- react-text: 93 -->
+<!-- /react-text --><li data-reactid="94">Get database object</li><!-- react-text: 95 -->
+<!-- /react-text --><li data-reactid="96">Open transaction on database</li><!-- react-text: 97 -->
+<!-- /react-text --><li data-reactid="98">Open object store on transaction</li><!-- react-text: 99 -->
+<!-- /react-text --><li data-reactid="100">Perform operation on object store</li><!-- react-text: 101 -->
+<!-- /react-text --></ol><!-- react-text: 102 -->
+<!-- /react-text --><pre data-reactid="103"><code class="language-javascript" data-reactid="104">dbPromise.then(function(db) { ///step 1
+  var tx = db.transaction(&#x27;store&#x27;, &#x27;readwrite&#x27;); //step 2
+  var store = tx.objectStore(&#x27;store&#x27;); //step 3
+  var item = {
+    name: &#x27;sandwich&#x27;,
+    price: 4.99,
+    description: &#x27;A very tasty sandwich&#x27;,
+    created: new Date().getTime()
+  };
+  store.add(item); //step 4
+  return tx.complete;
+}).then(function() {
+  console.log(&#x27;added item to the store os!&#x27;);
+});
+</code></pre><!-- react-text: 105 -->
+<!-- /react-text --><p data-reactid="106"><strong data-reactid="107"> Reading Data</strong></p><!-- react-text: 108 -->
+<!-- /react-text --><pre data-reactid="109"><code class="language-javascript" data-reactid="110">dbPromise.then(function(db) { //step 1
+  var tx = db.transaction(&#x27;store&#x27;, &#x27;readonly&#x27;); //step 2
+  var store = tx.objectStore(&#x27;store&#x27;); //step 3
+  return store.get(&#x27;sandwich&#x27;); //step 4
+}).then(function(val) {
+  console.dir(val);
+});
+</code></pre><!-- react-text: 111 -->
+<!-- /react-text --><p data-reactid="112"><strong data-reactid="113">Updating Data</strong></p><!-- react-text: 114 -->
+<!-- /react-text --><p data-reactid="115"><!-- react-text: 116 -->Similar to creating data except we us the following method
+<!-- /react-text --><code data-reactid="117">someObjectStore.put(data, optionalKey);</code></p><!-- react-text: 118 -->
+<!-- /react-text --><p data-reactid="119"><strong data-reactid="120">Deleting Data</strong></p><!-- react-text: 121 -->
+<!-- /react-text --><p data-reactid="122"><!-- react-text: 123 -->Similar to creating data except we us the following method
+<!-- /react-text --><code data-reactid="124">someObjectStore.delete(primaryKey);</code></p><!-- react-text: 125 -->
+<!-- /react-text --><h2 id="retrieving-data" data-reactid="126"><a href="#retrieving-data" class="phenomic-HeadingAnchor" data-reactid="127">#</a><!-- react-text: 128 -->Retrieving Data<!-- /react-text --></h2><!-- react-text: 129 -->
+<!-- /react-text --><p data-reactid="130"><strong data-reactid="131">Get all method</strong></p><!-- react-text: 132 -->
+<!-- /react-text --><p data-reactid="133">Easiest way that returns all objects in optional range (optionalConstraint) and returns array sorted by primary key.</p><!-- react-text: 134 -->
+<!-- /react-text --><p data-reactid="135"><code data-reactid="136">someObjectStore.getAll(optionalConstraint);</code></p><!-- react-text: 137 -->
+<!-- /react-text --><pre data-reactid="138"><code class="language-javascript" data-reactid="139">dbPromise.then(function(db) {
+  var tx = db.transaction(&#x27;store&#x27;, &#x27;readonly&#x27;);
+  var store = tx.objectStore(&#x27;store&#x27;);
+  return store.getAll();
+}).then(function(items) {
+  console.log(&#x27;Items by name:&#x27;, items);
+});
+</code></pre><!-- react-text: 140 -->
+<!-- /react-text --><p data-reactid="141"><strong data-reactid="142">Cursors</strong></p><!-- react-text: 143 -->
+<!-- /react-text --><p data-reactid="144">A cursor selects each object in an object store or index one by one, letting you do something with the data as it is selected.</p><!-- react-text: 145 -->
+<!-- /react-text --><pre data-reactid="146"><code class="language-javascript" data-reactid="147">dbPromise.then(function(db) {
+  var tx = db.transaction(&#x27;store&#x27;, &#x27;readonly&#x27;);
+  var store = tx.objectStore(&#x27;store&#x27;);
+  return store.openCursor();
+}).then(function logItems(cursor) {
+  if (!cursor) {return;}
+  console.log(&#x27;Cursored at:&#x27;, cursor.key);
+  for (var field in cursor.value) {
+    console.log(cursor.value[field]);
+  }
+  return cursor.continue().then(logItems);
+}).then(function() {
+  console.log(&#x27;Done cursoring&#x27;);
+});
+</code></pre><!-- react-text: 148 -->
+<!-- /react-text --><p data-reactid="149"><strong data-reactid="150">Note: Remember to close the test page. The database version can&#x27;t be changed while another page is using the database.</strong></p></div></article></div></div><footer data-reactid="151"><div class="footer" data-reactid="152"><div data-reactid="153"><!-- react-text: 154 -->Scott LaForest © <!-- /react-text --><!-- react-text: 155 -->2017<!-- /react-text --></div><div data-reactid="156"><!-- react-text: 157 -->Created with ❤ using  <!-- /react-text --><a href="https://phenomic.io/" style="color:inherit;" data-reactid="158">Phenomic</a></div><div data-reactid="159"><!-- react-text: 160 -->Check out the source code  <!-- /react-text --><a href="https://github.com/scottyla19/phenomic-portfolio" style="color:inherit;" data-reactid="161"><i class="fa fa-github" data-reactid="162"></i></a></div></div></footer></div></div><script id="PhenomicHydration" type="text/json">{"collection=posts&id=2017-05-18":{"status":"idle","node":{"date":"2017-01-01","title":"Indexed DB Notes","desc":"Notes from the Google IndexedDB CodeLab. Includes CRUD with object stores, cursors and uses idb library.","tags":"IdexedDB","author":"Scott LaForest","posted":"05/18/17","body":{"c":[{"c":[{"c":"#","p":{"href":"#notes","className":"phenomic-HeadingAnchor"},"t":"a"},"Notes"],"p":{"id":"notes"},"t":"h1"},"\n",{"c":[{"c":"#","p":{"href":"#terminology","className":"phenomic-HeadingAnchor"},"t":"a"},"Terminology"],"p":{"id":"terminology"},"t":"h2"},"\n",{"c":["\n",{"c":"Database: contains all of the object stores (same as sql)","t":"li"},"\n",{"c":"Object Store: Similar to tables in sql","t":"li"},"\n",{"c":"Index: A property of an object store that allows for easy search and retrieval.","t":"li"},"\n",{"c":"Operation: An interaction with a databas.","t":"li"},"\n",{"c":"Transaction: A wrapper around an operation that helps keep integrity of a db. If one operation fails, none of the changes are saved and db is unaltered.","t":"li"},"\n",{"c":"Cursor: method for iterating over a multiple records in a db","t":"li"},"\n"],"t":"ul"},"\n",{"c":[{"c":"#","p":{"href":"#working-with-db","className":"phenomic-HeadingAnchor"},"t":"a"},"Working with DB"],"p":{"id":"working-with-db"},"t":"h2"},"\n",{"c":{"c":" DB and create Object Store (OS)","t":"strong"},"t":"p"},"\n",{"c":{"c":"var dbPromise = idb.open('test-db2', 1, function(upgradeDb) {\n   console.log('making a new object store');\n   if (!upgradeDb.objectStoreNames.contains('firstOS')) {\n     upgradeDb.createObjectStore('firstOS');\n   }\n });\n","p":{"className":"language-javascript"},"t":"code"},"t":"pre"},"\n",{"c":[" Always check if OS is already created --> ",{"c":"!upgradeDb.objectStoreNames.contains('firstOS')","t":"code"}],"t":"p"},"\n",{"c":[" ",{"c":" Primary Keys","t":"strong"}],"t":"p"},"\n",{"c":" A key path is a property that always exists and contains a unique value. For example, in the case of a \"people\" object store we could choose the email address as the key path.","t":"p"},"\n",{"c":{"c":"upgradeDb.createObjectStore('people', {keyPath: 'email'});","t":"code"},"t":"p"},"\n",{"c":"This example creates an object store called \"people\" and assigns the \"email\" property as the primary key.","t":"p"},"\n",{"c":{"c":"upgradeDb.createObjectStore('notes', {autoIncrement:true});","t":"code"},"t":"p"},"\n",{"c":"This example creates an object store called \"notes\" and sets the primary key to be assigned automatically as an auto incrementing number.","t":"p"},"\n",{"c":{"c":"upgradeDb.createObjectStore('logs', {keyPath: 'id', autoIncrement:true});","t":"code"},"t":"p"},"\n",{"c":"This example is similar to the previous example, but this time the auto incrementing value is assigned to a property called \"id\".","t":"p"},"\n",{"c":[{"c":"#","p":{"href":"#working-with-data","className":"phenomic-HeadingAnchor"},"t":"a"},"Working with data"],"p":{"id":"working-with-data"},"t":"h2"},"\n",{"c":[{"c":"Creating Data","t":"strong"},"\nAll data operations in IndexedDB are carried out inside a transaction. Each operation has this form:"],"t":"p"},"\n",{"c":["\n",{"c":"Get database object","t":"li"},"\n",{"c":"Open transaction on database","t":"li"},"\n",{"c":"Open object store on transaction","t":"li"},"\n",{"c":"Perform operation on object store","t":"li"},"\n"],"t":"ol"},"\n",{"c":{"c":"dbPromise.then(function(db) { ///step 1\n  var tx = db.transaction('store', 'readwrite'); //step 2\n  var store = tx.objectStore('store'); //step 3\n  var item = {\n    name: 'sandwich',\n    price: 4.99,\n    description: 'A very tasty sandwich',\n    created: new Date().getTime()\n  };\n  store.add(item); //step 4\n  return tx.complete;\n}).then(function() {\n  console.log('added item to the store os!');\n});\n","p":{"className":"language-javascript"},"t":"code"},"t":"pre"},"\n",{"c":{"c":" Reading Data","t":"strong"},"t":"p"},"\n",{"c":{"c":"dbPromise.then(function(db) { //step 1\n  var tx = db.transaction('store', 'readonly'); //step 2\n  var store = tx.objectStore('store'); //step 3\n  return store.get('sandwich'); //step 4\n}).then(function(val) {\n  console.dir(val);\n});\n","p":{"className":"language-javascript"},"t":"code"},"t":"pre"},"\n",{"c":{"c":"Updating Data","t":"strong"},"t":"p"},"\n",{"c":["Similar to creating data except we us the following method\n",{"c":"someObjectStore.put(data, optionalKey);","t":"code"}],"t":"p"},"\n",{"c":{"c":"Deleting Data","t":"strong"},"t":"p"},"\n",{"c":["Similar to creating data except we us the following method\n",{"c":"someObjectStore.delete(primaryKey);","t":"code"}],"t":"p"},"\n",{"c":[{"c":"#","p":{"href":"#retrieving-data","className":"phenomic-HeadingAnchor"},"t":"a"},"Retrieving Data"],"p":{"id":"retrieving-data"},"t":"h2"},"\n",{"c":{"c":"Get all method","t":"strong"},"t":"p"},"\n",{"c":"Easiest way that returns all objects in optional range (optionalConstraint) and returns array sorted by primary key.","t":"p"},"\n",{"c":{"c":"someObjectStore.getAll(optionalConstraint);","t":"code"},"t":"p"},"\n",{"c":{"c":"dbPromise.then(function(db) {\n  var tx = db.transaction('store', 'readonly');\n  var store = tx.objectStore('store');\n  return store.getAll();\n}).then(function(items) {\n  console.log('Items by name:', items);\n});\n","p":{"className":"language-javascript"},"t":"code"},"t":"pre"},"\n",{"c":{"c":"Cursors","t":"strong"},"t":"p"},"\n",{"c":"A cursor selects each object in an object store or index one by one, letting you do something with the data as it is selected.","t":"p"},"\n",{"c":{"c":"dbPromise.then(function(db) {\n  var tx = db.transaction('store', 'readonly');\n  var store = tx.objectStore('store');\n  return store.openCursor();\n}).then(function logItems(cursor) {\n  if (!cursor) {return;}\n  console.log('Cursored at:', cursor.key);\n  for (var field in cursor.value) {\n    console.log(cursor.value[field]);\n  }\n  return cursor.continue().then(logItems);\n}).then(function() {\n  console.log('Done cursoring');\n});\n","p":{"className":"language-javascript"},"t":"code"},"t":"pre"},"\n",{"c":{"c":"Note: Remember to close the test page. The database version can't be changed while another page is using the database.","t":"strong"},"t":"p"}],"t":"div"}}}}</script><script src="/phenomic.main.js" async=""></script></body></html>

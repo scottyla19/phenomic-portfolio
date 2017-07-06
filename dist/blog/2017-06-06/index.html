@@ -1,0 +1,153 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/></head><body><div id="PhenomicRoot"><div data-reactroot="" data-reactid="1" data-react-checksum="1387711889"><!-- react-empty: 2 --><header data-reactid="3"><div class="header" data-reactid="4"><div class="header-left" data-reactid="5"><div class="header-icon" data-reactid="6"><img src="/laforest-icon-144.png" data-reactid="7"/></div><h4 class="header-name" data-reactid="8">Scott LaForest</h4><p data-reactid="9">Web Developer</p></div><div class="header-right" data-reactid="10"><div style="display:inline-block;position:relative;" data-reactid="11"><button style="border:10px;box-sizing:border-box;display:inline-block;font-family:Roboto, sans-serif;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);cursor:pointer;text-decoration:none;margin:0;padding:12px;outline:none;font-size:0;font-weight:inherit;position:relative;z-index:1;overflow:visible;transition:all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;width:48px;height:48px;background:none;-moz-box-sizing:border-box;-webkit-transition:all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;-moz-transition:all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;" tabindex="0" type="button" data-reactid="12"><div data-reactid="13"><span class="material-icons md-36" color="#FF5722" font-size="36px" style="color:#FF5722;position:relative;font-size:24px;display:inline-block;user-select:none;transition:all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-webkit-transition:all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;-moz-transition:all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;" data-reactid="14">menu</span></div></button><div style="display:none;" data-reactid="15"><!-- react-empty: 16 --><!-- react-empty: 17 --></div></div></div></div></header><div class="main-container" data-reactid="18"><div class="content" data-reactid="19"><article data-reactid="20"><h1 data-reactid="21">You Don&#x27;t Know JS Part 5</h1><h3 data-reactid="22"><!-- react-text: 23 -->Author: <!-- /react-text --><!-- react-text: 24 -->Scott LaForest<!-- /react-text --></h3><div data-reactid="25"><p data-reactid="26"><!-- react-text: 27 -->All examples and notes are taken from the excellent and free to <!-- /react-text --><a href="https://github.com/getify/You-Dont-Know-JS" data-reactid="28">read (online)</a><!-- react-text: 29 --> series of books titled <!-- /react-text --><em data-reactid="30">You Don&#x27;t Know JS</em><!-- react-text: 31 --> by Kyle Simpson.<!-- /react-text --></p><!-- react-text: 32 -->
+<!-- /react-text --><h2 id="6617" data-reactid="33"><a href="#6617" class="phenomic-HeadingAnchor" data-reactid="34">#</a><!-- react-text: 35 -->6/6/17<!-- /react-text --></h2><!-- react-text: 36 -->
+<!-- /react-text --><h3 id="more-on-closure" data-reactid="37"><a href="#more-on-closure" class="phenomic-HeadingAnchor" data-reactid="38">#</a><!-- react-text: 39 -->More on Closure<!-- /react-text --></h3><!-- react-text: 40 -->
+<!-- /react-text --><p data-reactid="41">Closure is when a function is able to remember and access its lexical scope even when that function is executing outside its lexical scope.</p><!-- react-text: 42 -->
+<!-- /react-text --><h3 id="more-on-modules" data-reactid="43"><a href="#more-on-modules" class="phenomic-HeadingAnchor" data-reactid="44">#</a><!-- react-text: 45 -->More on Modules<!-- /react-text --></h3><!-- react-text: 46 -->
+<!-- /react-text --><p data-reactid="47"><!-- react-text: 48 -->Below is an example of a &quot;Revealing Module&quot;. Requirements for modules:
+1. It is just a function and must be invoked for every instance. <!-- /react-text --><em data-reactid="49">There must be an outer enclosing function, and it must be invoked at least once (each time creates a new module instance).</em><!-- react-text: 50 -->
+2. Returns an object <!-- /react-text --><code data-reactid="51">{key:value,...}</code><!-- react-text: 52 --> with access to the &#x27;public&#x27; functions but not the inner &#x27;private&#x27; variables. Performs like a public API. <!-- /react-text --><em data-reactid="53">The enclosing function must return back at least one inner function, so that this inner function has closure over the private scope, and can access and/or modify that private state.</em></p><!-- react-text: 54 -->
+<!-- /react-text --><pre data-reactid="55"><code class="language-javascript" data-reactid="56">    var something = &quot;cool&quot;;
+    var another = [1, 2, 3];
+
+    function doSomething() {
+        console.log( something );
+    }
+
+    function doAnother() {
+        console.log( another.join( &quot; ! &quot; ) );
+    }
+
+    return {
+        doSomething: doSomething,
+        doAnother: doAnother
+    };
+}
+
+var foo = CoolModule();
+
+foo.doSomething(); // cool
+foo.doAnother(); // 1 ! 2 ! 3
+</code></pre><!-- react-text: 57 -->
+<!-- /react-text --><p data-reactid="58">Turn the function into an IIFE to create singleton objects.</p><!-- react-text: 59 -->
+<!-- /react-text --><pre data-reactid="60"><code class="language-javascript" data-reactid="61">var foo = (function CoolModule() {
+    var something = &quot;cool&quot;;
+    var another = [1, 2, 3];
+
+    function doSomething() {
+        console.log( something );
+    }
+
+    function doAnother() {
+        console.log( another.join( &quot; ! &quot; ) );
+    }
+
+    return {
+        doSomething: doSomething,
+        doAnother: doAnother
+    };
+})();
+
+foo.doSomething(); // cool
+foo.doAnother(); // 1 ! 2 ! 3
+</code></pre><!-- react-text: 62 -->
+<!-- /react-text --><h3 id="this" data-reactid="63"><a href="#this" class="phenomic-HeadingAnchor" data-reactid="64">#</a><!-- react-text: 65 -->this<!-- /react-text --></h3><!-- react-text: 66 -->
+<!-- /react-text --><p data-reactid="67"><!-- react-text: 68 --> <!-- /react-text --><strong data-reactid="69"><code data-reactid="70">this</code><!-- react-text: 71 --> is neither a reference to the function itself, nor is it a reference to the function&#x27;s lexical scope<!-- /react-text --></strong><!-- react-text: 72 -->.<!-- /react-text --></p><!-- react-text: 73 -->
+<!-- /react-text --><p data-reactid="74"><code data-reactid="75">this</code><!-- react-text: 76 --> is actually a binding that is made when a function is invoked, and what it <!-- /react-text --><strong data-reactid="77">references is determined entirely by the call-site where the function is called.</strong></p><!-- react-text: 78 -->
+<!-- /react-text --><pre data-reactid="79"><code class="language-javascript" data-reactid="80">function baz() {
+    // call-stack is: `baz`
+    // so, our call-site is in the global scope
+
+    console.log( &quot;baz&quot; );
+    bar(); // &lt;-- call-site for `bar`
+}
+
+function bar() {
+    // call-stack is: `baz` -&gt; `bar`
+    // so, our call-site is in `baz`
+
+    console.log( &quot;bar&quot; );
+    foo(); // &lt;-- call-site for `foo`
+}
+
+function foo() {
+    // call-stack is: `baz` -&gt; `bar` -&gt; `foo`
+    // so, our call-site is in `bar`
+
+    console.log( &quot;foo&quot; );
+}
+
+baz(); // &lt;-- call-site for `baz`
+</code></pre><!-- react-text: 81 -->
+<!-- /react-text --><p data-reactid="82">Take care when analyzing code to find the actual call-site (from the call-stack), because it&#x27;s the only thing that matters for this binding.</p><!-- react-text: 83 -->
+<!-- /react-text --><h3 id="this-binding-rules" data-reactid="84"><a href="#this-binding-rules" class="phenomic-HeadingAnchor" data-reactid="85">#</a><!-- react-text: 86 -->this Binding rules<!-- /react-text --></h3><!-- react-text: 87 -->
+<!-- /react-text --><ol data-reactid="88"><!-- react-text: 89 -->
+<!-- /react-text --><li data-reactid="90"><!-- react-text: 91 -->
+<!-- /react-text --><p data-reactid="92">Default Binding: The default rule when all others do not apply.</p><!-- react-text: 93 -->
+<!-- /react-text --><pre data-reactid="94"><code class="language-javascript" data-reactid="95">function foo() {
+            console.log( this.a );
+}
+
+var a = 2;
+
+foo(); // 2
+</code></pre><!-- react-text: 96 -->
+<!-- /react-text --><p data-reactid="97"><!-- react-text: 98 -->Notice when <!-- /react-text --><code data-reactid="99">foo()</code><!-- react-text: 100 --> is called, <!-- /react-text --><code data-reactid="101">this.a</code><!-- react-text: 102 --> resolves to our global variable a. Why? Because in this case, the default binding for <!-- /react-text --><code data-reactid="103">this</code><!-- react-text: 104 --> applies to the function call, and so points <!-- /react-text --><code data-reactid="105">this</code><!-- react-text: 106 --> at the global object.<!-- /react-text --></p><!-- react-text: 107 -->
+<!-- /react-text --><p data-reactid="108"><!-- react-text: 109 -->If <!-- /react-text --><code data-reactid="110">strict</code><!-- react-text: 111 --> mode is in effect, the global object is not eligible for the default binding, so the <!-- /react-text --><code data-reactid="112">this</code><!-- react-text: 113 --> is instead set to undefined.<!-- /react-text --></p><!-- react-text: 114 -->
+<!-- /react-text --></li><!-- react-text: 115 -->
+<!-- /react-text --><li data-reactid="116"><!-- react-text: 117 -->
+<!-- /react-text --><p data-reactid="118">Implicit Binding (Left of the dot): Does the call-site have a context object, also referred to as an owning or containing object.</p><!-- react-text: 119 -->
+<!-- /react-text --><pre data-reactid="120"><code class="language-javascript" data-reactid="121">function foo() {
+    console.log( this.a );
+}
+
+var obj = {
+    a: 2,
+    foo: foo
+};
+
+obj.foo(); // 2
+</code></pre><!-- react-text: 122 -->
+<!-- /react-text --><p data-reactid="123"><!-- react-text: 124 -->The call-site uses the <!-- /react-text --><code data-reactid="125">obj</code><!-- react-text: 126 --> context to reference the function, so you could say that the <!-- /react-text --><code data-reactid="127">obj</code><!-- react-text: 128 --> object &quot;owns&quot; or &quot;contains&quot; the function reference at the time the function is called.<!-- /react-text --></p><!-- react-text: 129 -->
+<!-- /react-text --><p data-reactid="130"><!-- react-text: 131 -->Because <!-- /react-text --><code data-reactid="132">obj</code><!-- react-text: 133 --> is the <!-- /react-text --><code data-reactid="134">this</code><!-- react-text: 135 --> for the <!-- /react-text --><code data-reactid="136">foo()</code><!-- react-text: 137 --> call, <!-- /react-text --><code data-reactid="138">this.a</code><!-- react-text: 139 --> is synonymous with obj.a.<!-- /react-text --></p><!-- react-text: 140 -->
+<!-- /react-text --></li><!-- react-text: 141 -->
+<!-- /react-text --><li data-reactid="142"><!-- react-text: 143 -->
+<!-- /react-text --><p data-reactid="144"><!-- react-text: 145 -->Explicit Binding: Directly stating what the <!-- /react-text --><code data-reactid="146">this</code><!-- react-text: 147 --> should be using either <!-- /react-text --><code data-reactid="148">call()</code><!-- react-text: 149 -->, <!-- /react-text --><code data-reactid="150">apply()</code><!-- react-text: 151 -->, or even <!-- /react-text --><code data-reactid="152">bind()</code><!-- react-text: 153 -->.<!-- /react-text --></p><!-- react-text: 154 -->
+<!-- /react-text --><p data-reactid="155"><code data-reactid="156">bind()</code><!-- react-text: 157 --> returns a function which will act like the original function but with <!-- /react-text --><code data-reactid="158">this</code><!-- react-text: 159 --> predefined. It is usually used when you want to pass a function to an event handler or other async callback.<!-- /react-text --></p><!-- react-text: 160 -->
+<!-- /react-text --><p data-reactid="161"><code data-reactid="162">call()</code><!-- react-text: 163 --> and <!-- /react-text --><code data-reactid="164">apply()</code><!-- react-text: 165 --> will call a function immediately letting you specify both the value of <!-- /react-text --><code data-reactid="166">this</code><!-- react-text: 167 --> and any arguments the function will receive. Difference between <!-- /react-text --><code data-reactid="168">call()</code><!-- react-text: 169 --> and <!-- /react-text --><code data-reactid="170">apply()</code><!-- react-text: 171 --> is both accept additional parameters but <!-- /react-text --><code data-reactid="172">call()</code><!-- react-text: 173 --> must specify each additional parameter separated by a comma. Whereas <!-- /react-text --><code data-reactid="174">apply()</code><!-- react-text: 175 --> can pass in an array of additional parameters.<!-- /react-text --></p><!-- react-text: 176 -->
+<!-- /react-text --></li><!-- react-text: 177 -->
+<!-- /react-text --><li data-reactid="178"><!-- react-text: 179 -->
+<!-- /react-text --><p data-reactid="180"><!-- react-text: 181 -->New Binding: Using the <!-- /react-text --><code data-reactid="182">new</code><!-- react-text: 183 --> operator when creating a new variable. This does four things:<!-- /react-text --></p><!-- react-text: 184 -->
+<!-- /react-text --><ol data-reactid="185"><!-- react-text: 186 -->
+<!-- /react-text --><li data-reactid="187">Creates a brand new object (aka, constructed) out of thin air</li><!-- react-text: 188 -->
+<!-- /react-text --><li data-reactid="189"><!-- react-text: 190 -->The newly constructed object is [<!-- /react-text --><!-- react-text: 191 -->[<!-- /react-text --><!-- react-text: 192 -->Prototype<!-- /react-text --><!-- react-text: 193 -->]<!-- /react-text --><!-- react-text: 194 -->]-linked<!-- /react-text --></li><!-- react-text: 195 -->
+<!-- /react-text --><li data-reactid="196"><!-- react-text: 197 -->The newly constructed object is set as the <!-- /react-text --><code data-reactid="198">this</code><!-- react-text: 199 --> binding for that function call<!-- /react-text --></li><!-- react-text: 200 -->
+<!-- /react-text --><li data-reactid="201">Unless the function returns its own alternate object, the new-invoked function call will automatically return the newly constructed object.</li><!-- react-text: 202 -->
+<!-- /react-text --></ol><!-- react-text: 203 -->
+<!-- /react-text --></li><!-- react-text: 204 -->
+<!-- /react-text --></ol><!-- react-text: 205 -->
+<!-- /react-text --><pre data-reactid="206"><code class="language-javascript" data-reactid="207">    function foo(a) {
+        this.a = a;
+    }
+
+    var bar = new foo( 2 );
+    console.log( bar.a ); // 2
+</code></pre><!-- react-text: 208 -->
+<!-- /react-text --><h3 id="determining-this" data-reactid="209"><a href="#determining-this" class="phenomic-HeadingAnchor" data-reactid="210">#</a><!-- react-text: 211 -->Determining this<!-- /react-text --></h3><!-- react-text: 212 -->
+<!-- /react-text --><ol data-reactid="213"><!-- react-text: 214 -->
+<!-- /react-text --><li data-reactid="215"><!-- react-text: 216 -->
+<!-- /react-text --><p data-reactid="217">Is the function called with new (new binding)? If so, this is the newly constructed object.</p><!-- react-text: 218 -->
+<!-- /react-text --><p data-reactid="219"><code data-reactid="220">var bar = new foo()</code></p><!-- react-text: 221 -->
+<!-- /react-text --></li><!-- react-text: 222 -->
+<!-- /react-text --><li data-reactid="223"><!-- react-text: 224 -->
+<!-- /react-text --><p data-reactid="225"><!-- react-text: 226 -->Is the function called with <!-- /react-text --><code data-reactid="227">call</code><!-- react-text: 228 --> or <!-- /react-text --><code data-reactid="229">apply</code><!-- react-text: 230 --> (explicit binding), even hidden inside a <!-- /react-text --><code data-reactid="231">bind</code><!-- react-text: 232 --> hard binding? If so, <!-- /react-text --><code data-reactid="233">this</code><!-- react-text: 234 --> is the explicitly specified object.<!-- /react-text --></p><!-- react-text: 235 -->
+<!-- /react-text --><p data-reactid="236"><code data-reactid="237">var bar = foo.call( obj2 )</code></p><!-- react-text: 238 -->
+<!-- /react-text --></li><!-- react-text: 239 -->
+<!-- /react-text --><li data-reactid="240"><!-- react-text: 241 -->
+<!-- /react-text --><p data-reactid="242"><!-- react-text: 243 -->Is the function called with a context (implicit binding), otherwise known as an owning or containing object? If so, <!-- /react-text --><code data-reactid="244">this</code><!-- react-text: 245 --> is that context object.<!-- /react-text --></p><!-- react-text: 246 -->
+<!-- /react-text --><p data-reactid="247"><code data-reactid="248">var bar = obj1.foo()</code></p><!-- react-text: 249 -->
+<!-- /react-text --></li><!-- react-text: 250 -->
+<!-- /react-text --><li data-reactid="251"><!-- react-text: 252 -->
+<!-- /react-text --><p data-reactid="253"><!-- react-text: 254 -->Otherwise, default the <!-- /react-text --><code data-reactid="255">this</code><!-- react-text: 256 --> (default binding). If in <!-- /react-text --><code data-reactid="257">strict mode</code><!-- react-text: 258 -->, pick undefined, otherwise pick the global object.<!-- /react-text --></p><!-- react-text: 259 -->
+<!-- /react-text --><p data-reactid="260"><code data-reactid="261">var bar = foo()</code></p><!-- react-text: 262 -->
+<!-- /react-text --></li><!-- react-text: 263 -->
+<!-- /react-text --></ol></div></article></div></div><footer data-reactid="264"><div class="footer" data-reactid="265"><div data-reactid="266"><!-- react-text: 267 -->Scott LaForest © <!-- /react-text --><!-- react-text: 268 -->2017<!-- /react-text --></div><div data-reactid="269"><!-- react-text: 270 -->Created with ❤ using  <!-- /react-text --><a href="https://phenomic.io/" style="color:inherit;" data-reactid="271">Phenomic</a></div><div data-reactid="272"><!-- react-text: 273 -->Check out the source code  <!-- /react-text --><a href="https://github.com/scottyla19/phenomic-portfolio" style="color:inherit;" data-reactid="274"><i class="fa fa-github" data-reactid="275"></i></a></div></div></footer></div></div><script id="PhenomicHydration" type="text/json">{"collection=posts&id=2017-06-06":{"status":"idle","node":{"date":"2017-01-01","title":"You Don't Know JS Part 5","desc":"Notes on the fifth day of reading through You Don't Know JS. Includes more on closure, more on modules, and a lot on this.","tags":"YDKJS","author":"Scott LaForest","posted":"06/06/17","body":{"c":[{"c":["All examples and notes are taken from the excellent and free to ",{"c":"read (online)","p":{"href":"https://github.com/getify/You-Dont-Know-JS"},"t":"a"}," series of books titled ",{"c":"You Don't Know JS","t":"em"}," by Kyle Simpson."],"t":"p"},"\n",{"c":[{"c":"#","p":{"href":"#6617","className":"phenomic-HeadingAnchor"},"t":"a"},"6/6/17"],"p":{"id":"6617"},"t":"h2"},"\n",{"c":[{"c":"#","p":{"href":"#more-on-closure","className":"phenomic-HeadingAnchor"},"t":"a"},"More on Closure"],"p":{"id":"more-on-closure"},"t":"h3"},"\n",{"c":"Closure is when a function is able to remember and access its lexical scope even when that function is executing outside its lexical scope.","t":"p"},"\n",{"c":[{"c":"#","p":{"href":"#more-on-modules","className":"phenomic-HeadingAnchor"},"t":"a"},"More on Modules"],"p":{"id":"more-on-modules"},"t":"h3"},"\n",{"c":["Below is an example of a \"Revealing Module\". Requirements for modules:\n1. It is just a function and must be invoked for every instance. ",{"c":"There must be an outer enclosing function, and it must be invoked at least once (each time creates a new module instance).","t":"em"},"\n2. Returns an object ",{"c":"{key:value,...}","t":"code"}," with access to the 'public' functions but not the inner 'private' variables. Performs like a public API. ",{"c":"The enclosing function must return back at least one inner function, so that this inner function has closure over the private scope, and can access and/or modify that private state.","t":"em"}],"t":"p"},"\n",{"c":{"c":"    var something = \"cool\";\n    var another = [1, 2, 3];\n\n    function doSomething() {\n        console.log( something );\n    }\n\n    function doAnother() {\n        console.log( another.join( \" ! \" ) );\n    }\n\n    return {\n        doSomething: doSomething,\n        doAnother: doAnother\n    };\n}\n\nvar foo = CoolModule();\n\nfoo.doSomething(); // cool\nfoo.doAnother(); // 1 ! 2 ! 3\n","p":{"className":"language-javascript"},"t":"code"},"t":"pre"},"\n",{"c":"Turn the function into an IIFE to create singleton objects.","t":"p"},"\n",{"c":{"c":"var foo = (function CoolModule() {\n    var something = \"cool\";\n    var another = [1, 2, 3];\n\n    function doSomething() {\n        console.log( something );\n    }\n\n    function doAnother() {\n        console.log( another.join( \" ! \" ) );\n    }\n\n    return {\n        doSomething: doSomething,\n        doAnother: doAnother\n    };\n})();\n\nfoo.doSomething(); // cool\nfoo.doAnother(); // 1 ! 2 ! 3\n","p":{"className":"language-javascript"},"t":"code"},"t":"pre"},"\n",{"c":[{"c":"#","p":{"href":"#this","className":"phenomic-HeadingAnchor"},"t":"a"},"this"],"p":{"id":"this"},"t":"h3"},"\n",{"c":[" ",{"c":[{"c":"this","t":"code"}," is neither a reference to the function itself, nor is it a reference to the function's lexical scope"],"t":"strong"},"."],"t":"p"},"\n",{"c":[{"c":"this","t":"code"}," is actually a binding that is made when a function is invoked, and what it ",{"c":"references is determined entirely by the call-site where the function is called.","t":"strong"}],"t":"p"},"\n",{"c":{"c":"function baz() {\n    // call-stack is: `baz`\n    // so, our call-site is in the global scope\n\n    console.log( \"baz\" );\n    bar(); // <-- call-site for `bar`\n}\n\nfunction bar() {\n    // call-stack is: `baz` -> `bar`\n    // so, our call-site is in `baz`\n\n    console.log( \"bar\" );\n    foo(); // <-- call-site for `foo`\n}\n\nfunction foo() {\n    // call-stack is: `baz` -> `bar` -> `foo`\n    // so, our call-site is in `bar`\n\n    console.log( \"foo\" );\n}\n\nbaz(); // <-- call-site for `baz`\n","p":{"className":"language-javascript"},"t":"code"},"t":"pre"},"\n",{"c":"Take care when analyzing code to find the actual call-site (from the call-stack), because it's the only thing that matters for this binding.","t":"p"},"\n",{"c":[{"c":"#","p":{"href":"#this-binding-rules","className":"phenomic-HeadingAnchor"},"t":"a"},"this Binding rules"],"p":{"id":"this-binding-rules"},"t":"h3"},"\n",{"c":["\n",{"c":["\n",{"c":"Default Binding: The default rule when all others do not apply.","t":"p"},"\n",{"c":{"c":"function foo() {\n            console.log( this.a );\n}\n\nvar a = 2;\n\nfoo(); // 2\n","p":{"className":"language-javascript"},"t":"code"},"t":"pre"},"\n",{"c":["Notice when ",{"c":"foo()","t":"code"}," is called, ",{"c":"this.a","t":"code"}," resolves to our global variable a. Why? Because in this case, the default binding for ",{"c":"this","t":"code"}," applies to the function call, and so points ",{"c":"this","t":"code"}," at the global object."],"t":"p"},"\n",{"c":["If ",{"c":"strict","t":"code"}," mode is in effect, the global object is not eligible for the default binding, so the ",{"c":"this","t":"code"}," is instead set to undefined."],"t":"p"},"\n"],"t":"li"},"\n",{"c":["\n",{"c":"Implicit Binding (Left of the dot): Does the call-site have a context object, also referred to as an owning or containing object.","t":"p"},"\n",{"c":{"c":"function foo() {\n    console.log( this.a );\n}\n\nvar obj = {\n    a: 2,\n    foo: foo\n};\n\nobj.foo(); // 2\n","p":{"className":"language-javascript"},"t":"code"},"t":"pre"},"\n",{"c":["The call-site uses the ",{"c":"obj","t":"code"}," context to reference the function, so you could say that the ",{"c":"obj","t":"code"}," object \"owns\" or \"contains\" the function reference at the time the function is called."],"t":"p"},"\n",{"c":["Because ",{"c":"obj","t":"code"}," is the ",{"c":"this","t":"code"}," for the ",{"c":"foo()","t":"code"}," call, ",{"c":"this.a","t":"code"}," is synonymous with obj.a."],"t":"p"},"\n"],"t":"li"},"\n",{"c":["\n",{"c":["Explicit Binding: Directly stating what the ",{"c":"this","t":"code"}," should be using either ",{"c":"call()","t":"code"},", ",{"c":"apply()","t":"code"},", or even ",{"c":"bind()","t":"code"},"."],"t":"p"},"\n",{"c":[{"c":"bind()","t":"code"}," returns a function which will act like the original function but with ",{"c":"this","t":"code"}," predefined. It is usually used when you want to pass a function to an event handler or other async callback."],"t":"p"},"\n",{"c":[{"c":"call()","t":"code"}," and ",{"c":"apply()","t":"code"}," will call a function immediately letting you specify both the value of ",{"c":"this","t":"code"}," and any arguments the function will receive. Difference between ",{"c":"call()","t":"code"}," and ",{"c":"apply()","t":"code"}," is both accept additional parameters but ",{"c":"call()","t":"code"}," must specify each additional parameter separated by a comma. Whereas ",{"c":"apply()","t":"code"}," can pass in an array of additional parameters."],"t":"p"},"\n"],"t":"li"},"\n",{"c":["\n",{"c":["New Binding: Using the ",{"c":"new","t":"code"}," operator when creating a new variable. This does four things:"],"t":"p"},"\n",{"c":["\n",{"c":"Creates a brand new object (aka, constructed) out of thin air","t":"li"},"\n",{"c":["The newly constructed object is [","[","Prototype","]","]-linked"],"t":"li"},"\n",{"c":["The newly constructed object is set as the ",{"c":"this","t":"code"}," binding for that function call"],"t":"li"},"\n",{"c":"Unless the function returns its own alternate object, the new-invoked function call will automatically return the newly constructed object.","t":"li"},"\n"],"t":"ol"},"\n"],"t":"li"},"\n"],"t":"ol"},"\n",{"c":{"c":"    function foo(a) {\n        this.a = a;\n    }\n\n    var bar = new foo( 2 );\n    console.log( bar.a ); // 2\n","p":{"className":"language-javascript"},"t":"code"},"t":"pre"},"\n",{"c":[{"c":"#","p":{"href":"#determining-this","className":"phenomic-HeadingAnchor"},"t":"a"},"Determining this"],"p":{"id":"determining-this"},"t":"h3"},"\n",{"c":["\n",{"c":["\n",{"c":"Is the function called with new (new binding)? If so, this is the newly constructed object.","t":"p"},"\n",{"c":{"c":"var bar = new foo()","t":"code"},"t":"p"},"\n"],"t":"li"},"\n",{"c":["\n",{"c":["Is the function called with ",{"c":"call","t":"code"}," or ",{"c":"apply","t":"code"}," (explicit binding), even hidden inside a ",{"c":"bind","t":"code"}," hard binding? If so, ",{"c":"this","t":"code"}," is the explicitly specified object."],"t":"p"},"\n",{"c":{"c":"var bar = foo.call( obj2 )","t":"code"},"t":"p"},"\n"],"t":"li"},"\n",{"c":["\n",{"c":["Is the function called with a context (implicit binding), otherwise known as an owning or containing object? If so, ",{"c":"this","t":"code"}," is that context object."],"t":"p"},"\n",{"c":{"c":"var bar = obj1.foo()","t":"code"},"t":"p"},"\n"],"t":"li"},"\n",{"c":["\n",{"c":["Otherwise, default the ",{"c":"this","t":"code"}," (default binding). If in ",{"c":"strict mode","t":"code"},", pick undefined, otherwise pick the global object."],"t":"p"},"\n",{"c":{"c":"var bar = foo()","t":"code"},"t":"p"},"\n"],"t":"li"},"\n"],"t":"ol"}],"t":"div"}}}}</script><script src="/phenomic.main.js" async=""></script></body></html>
