@@ -4,6 +4,23 @@ import Header from "./Header.js";
 import Footer from "./Footer.js";
 
 class Layout extends Component {
+  componentDidMount() {
+    (function() {
+      "use strict";
+      if (!("serviceWorker" in navigator)) {
+        console.log("Service worker not supported");
+        return;
+      }
+      navigator.serviceWorker
+        .register("service-worker.js")
+        .then(function(registration) {
+          console.log("Registered at scope:", registration.scope);
+        })
+        .catch(function(error) {
+          console.log("Registration failed:", error);
+        });
+    })();
+  }
   render() {
     return (
       <div>
@@ -21,11 +38,14 @@ class Layout extends Component {
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
           />
+          <link rel="stylesheet" type="text/css" href="styles.css" />
         </Head>
         <header>
           <Header />
         </header>
-        <div className="main-container">{this.props.children}</div>
+        <div className="main-container">
+          {this.props.children}
+        </div>
         <footer>
           <Footer />
         </footer>
